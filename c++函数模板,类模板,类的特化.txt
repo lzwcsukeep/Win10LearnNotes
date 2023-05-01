@@ -1,0 +1,68 @@
+1.c++ 为什么要有函数模板？
+
+因为由于函数重载，多个重载的函数可能拥有完全相同的行为，即相同的函数体，仅仅只有参数的类型不同。
+
+这样就有理由编写一种通用类型的函数。这种通用类型的函数，行为统一，但是可以适用不同的类型。
+
+2.c++ 类模板？
+
+就如函数模板一样，我们也可以设计类模板，允许类的成员（类的方法或者变量）使用模板参数(templates 关键字后一对尖括号里的参数)作为类型。换句话说，在模板参数里的类型可以在类中的成员方法或者属性中使用。在使用类模板时在指定确定的类型。也能达到代码复用的效果。
+
+声明类模板：
+使用关键字template.
+语法格式：
+ template <class T>
+class myClass{
+T m_var;
+T m_func(T &t) { ... } 
+  ....
+}
+即前面用template <class T> 说明之后，后面就同普通类的声明差不多了，只不过T 可以在类中当作具体类型使用。
+
+3.类模板特化(Template specialization)
+
+在模板基础上，有可能我们需要创造一个类，这个类针对确定的类型，在具有模板类的提供的方法，变量基础上还具有不同的其他方法，这个时候就可以用到类的特化。
+For example, let's suppose that we have a very simple class called mycontainer that can store one element of any type and that has just one member function called increase, which increases its value. But we find that when it stores an element of type char it would be more convenient to have a completely different implementation with a function member uppercase, so we decide to declare a class template specialization for that type:
+——————————————————————————
+// template specialization
+#include <iostream>
+using namespace std;
+
+// class template:
+template <class T>
+class mycontainer {
+    T element;
+  public:
+    mycontainer (T arg) {element=arg;}
+    T increase () {return ++element;}
+};
+
+// class template specialization:
+template <>
+class mycontainer <char> {
+    char element;
+  public:
+    mycontainer (char arg) {element=arg;}
+    char uppercase ()
+    {
+      if ((element>='a')&&(element<='z'))
+      element+='A'-'a';
+      return element;
+    }
+};
+
+int main () {
+  mycontainer<int> myint (7);
+  mycontainer<char> mychar ('j');
+  cout << myint.increase() << endl;
+  cout << mychar.uppercase() << endl;
+  return 0;
+}
+——————————————————————————————
+
+特化类的模板语法为： template <> class mycontainer <char> { ... } ;
+
+声明类的模板语法为：template <class T> class mycontainer { ... } ;
+
+
+注意：当我们为模板类声明模板特化时，我们还必须定义其所有成员，甚至那些与模板类相同的成员，因为从类模板到模板特化没有成员的“继承”关系。

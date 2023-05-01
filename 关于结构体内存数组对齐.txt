@@ -1,0 +1,55 @@
+结构体里可以包含数组成员
+保存的是整个数组全部元素而不是数组的首地址，数组长度可以为0，或者为空。这时候数组叫柔性数组。
+柔性数组的大小不计入结构体总大小。
+main.cpp
+---------------------------------------------------
+#include <iostream>
+
+using namespace std ;
+
+struct test1{
+  int a;
+  int b;
+  double c ;
+  char d[0] ;
+};
+struct test2{
+  int a;
+  int b;
+  double c ;
+  char d[] ;
+};
+struct test3{
+  int a;
+  int b;
+  double c ;
+  char* d;
+};
+struct test4{
+  int a;
+  int b;
+  int c ;
+  char d[1001];
+};
+int main()
+{
+    cout << "int size :" << sizeof(int) <<endl ;
+    cout << "double size :" << sizeof(double) <<endl ;
+    cout << "char * size :" << sizeof(char *) <<endl ;
+    cout << "void * size :" << sizeof(void *) <<endl ;
+    cout << "test1 size :" << sizeof(test1) <<endl ;
+    cout << "test2 size :" << sizeof(test2) <<endl ;
+    cout << "test3 size :" << sizeof(test3) <<endl ;
+    cout << "test4 size :" << sizeof(test4) <<endl ;
+}
+运行后输出：
+-------------------------------------------------------------------------
+PS F:\Cpp_Workspace\VSCodeTest> g++ .\main.cpp ; .\a.exe
+int size :4     
+double size :8  
+char * size :8  
+void * size :8  
+test1 size :16  
+test2 size :16  
+test3 size :24  
+test4 size :1016

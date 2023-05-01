@@ -1,0 +1,16 @@
+首先是为什么要有make?
+
+当一个c++ 项目具有成千上万个文件时，手写如何编译这些文件是一件费时的工作，而且当某些文件更新之后
+也要手动的重新编译所有的文件。如果我们能够用树状结构确定修改的文件和其他文件的依赖关系就可以节省大量的时间。这就是make 的工作。
+
+如何解决上述问题？
+
+Make, Ninja, Ant, Gradle, MSVC are some of the build systems. For building a project, the developer writes a special code in 'build file', which is different from the project's source code. This build file contains the dependency-tree information; and the build system uses that build file to compile and link the source codes. In the case of 'Make' build system, the developer writes a 'makefile' for building the project.
+
+简言之，Make 是一个构建系统，开发者编写makefile 文件来指导如何构建工程。
+
+什么是Cmake?
+Cmake 是一个跨平台的构建工具，因为如下原因需要跨平台的构建工具
+The building of C++ projects is not standard across the platforms. This means, even if you have the source codes and makefile of a C++ project from your Linux machine, you cannot directly build that code inside Windows OS. 
+
+Cmake 产生cmakelist.txt 指导如何构建工程。

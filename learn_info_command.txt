@@ -1,0 +1,36 @@
+this is a learn note for `info` utility in linux.
+
+info command can help us read the document of something(eg..a command)
+
+which gives us more information we want to know.
+
+this is some notes when I read the output of command `info info`.
+
+## normal read 
+we can use UP and DOWN arrow to read it normal.
+
+BACKSPACE to scroll forward a full screen
+
+DEL to scroll backward a full screen.
+
+command 'p' for previous node,command 'n' for next node.
+
+command 'b' for going to the begining
+
+command 'm' for going to a menu.type '?' to list all menu you can go.
+
+command 'f' followed by a name to go to a cross reference. type '?' to list all cross reference 
+you can go.
+
+command 'ctrl-g' to cancel command 'm' or command 'f'.
+## cross reference and return
+
+when we read something is link referring to another document.we can type <ENTER>
+
+to enter it for more information.
+
+when we finish read the reference we can type command 'l' to return.
+
+## HLEP
+
+type 'h' to get help of basic command when reading info.
