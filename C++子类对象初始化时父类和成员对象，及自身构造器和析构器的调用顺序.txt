@@ -1,0 +1,64 @@
+C++ 对象初始化肯定会调用构造器来初始化对象。
+
+C++子类对象初始化时，父类和成员对象以及自身构造函数和析构函数的调用顺序为：
+
+构造函数：
+
+1.父类构造函数(有多个按声明顺序)
+2.成员对象的构造函数(有多个按声明顺序) 
+3.自身构造函数
+
+析构函数：
+
+和构造函数调用顺序相反。
+
+```C++
+
+#include <iostream>
+using namespace std ;
+struct A 
+{
+    A() { cout << "A() called!" <<endl;}
+    ~A() { cout << "~A() called! " <<endl ;}
+};
+struct B 
+{
+    B() { cout << "B() called!" <<endl;}
+    ~B() { cout << "~B() called! " <<endl ;}
+};
+struct Parent 
+{
+    Parent() { cout << "Parent() called!" <<endl;}
+    ~Parent() { cout << "~Parent() called! " <<endl ;}
+};
+struct Parent2 
+{
+    Parent2() { cout << "Parent2() called!" <<endl;}
+    ~Parent2() { cout << "~Parent2() called! " <<endl ;}
+};
+struct Son:Parent , Parent2
+{
+    A a ;
+    B b ;
+    Son() { cout << "Son() called!" <<endl;}
+    ~Son() { cout << "~Son() called! " <<endl ;}
+};
+
+int main()
+{
+    Son s ;
+    return 0 ;
+}
+
+```
+输出为：
+Parent() called!
+Parent2() called!
+A() called!
+B() called!
+Son() called!
+~Son() called! 
+~B() called! 
+~A() called! 
+~Parent2() called! 
+~Parent() called!

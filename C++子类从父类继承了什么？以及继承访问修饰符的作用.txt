@@ -1,0 +1,13 @@
+### 子类不会继承父类的以下成员：
+1.构造函数，析构函数，拷贝构造函数
+2.重载的操作符
+3.父类的友元函数
+4.私有成员(变量和方法)
+
+
+### 继承的类型：public ,protected, private
+继承访问修饰符指明了从父类继承过来的成员在子类中的访问权限，注意父类的private 成员无法被继承。
+有三种继承访问修饰符：public ,protected ,private
+ - public 继承：从父类继承过来的public成员，在子类中的访问权限是public ,从父类继承的protected成员在子类访问权限是protected.
+ - protected 继承 ：在父类是public 或 protected 的成员，继承之后在子类中的访问权限变成protected
+ - private 继承：在父类中是public 或 protected 的成员，继承之后在子类中的访问权限变成private
