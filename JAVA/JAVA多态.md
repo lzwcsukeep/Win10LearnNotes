@@ -44,5 +44,3 @@ public Employee getBuddy(){ ... }
 ```java
 public Manager getBuddy(){ ... } //OK to change return type
 ```
-
-

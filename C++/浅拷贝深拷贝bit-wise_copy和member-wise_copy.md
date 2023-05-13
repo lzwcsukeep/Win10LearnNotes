@@ -35,35 +35,3 @@ Finally:
 The default copy constructor will do a bit-wise copy if the object is known to be trivially copyable, or a member-wise copy if not. However, the compiler does not always have enough information to perform a proper copy of each member. For example, a pointer is copied by making a copy of the pointer, not by making a copy of the pointed object. That's why you should generally not rely on the compiler providing you with a default copy constructor when your object is not trivially copyable.
 
 A user-supplied constructor may do whatever type of copy the user likes. Hopefully, the user will choose wisely and do a member-wise copy.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
