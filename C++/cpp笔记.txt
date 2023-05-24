@@ -3,29 +3,40 @@
 C++ 中的非const静态变量，只能在类内声明而在类外进行初始化
 但是const 静态变量可以在类内初始化。
 
+```cpp
 class A
 {
-	static int a ;
+    static int a ;
 
 };
 
 int A::a = 2 ;  // no error  ,这就叫类外初始化,要带上数据类型
+```
 
 或者
+
+```cpp
 class A
 {
-	static const int a = 2 ; // no error
+    static const int a = 2 ; // no error
 };
+```
+
 是正确的。
 
 但下面这种写法是会报错的
+
+```cpp
 class A 
 {
-	static int a = 2 ;   // error ISO C++ forbids in-class initialization of non-const static member ‘A::a’
+    static int a = 2 ;   // error ISO C++ forbids in-class initialization of non-const static member ‘A::a’
 };
+```
 
 ### 关于C++中非静态成员和静态成员互相访问的问腿
+
 非静态成员函数可以访问类的所有数据成员：静态和非静态。
 静态成员函数只能对静态数据成员进行操作
-Non-static member functions can access all data members of the class: static and non-static.
-Static member functions can only operate on the static data members.
+
+> Non-static member functions can access all data members of the class: static and non-static.
+> Static member functions can only operate on the static data members.

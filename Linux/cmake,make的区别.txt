@@ -4,7 +4,7 @@
 也要手动的重新编译所有的文件。如果我们能够用树状结构确定修改的文件和其他文件的依赖关系就可以节省大量的时间。这就是make 的工作。
 
 如何解决上述问题？
-
+https://teaching.idallen.com/cst8207/13w/notes/450_file_system.html
 Make, Ninja, Ant, Gradle, MSVC are some of the build systems. For building a project, the developer writes a special code in 'build file', which is different from the project's source code. This build file contains the dependency-tree information; and the build system uses that build file to compile and link the source codes. In the case of 'Make' build system, the developer writes a 'makefile' for building the project.
 
 简言之，Make 是一个构建系统，开发者编写makefile 文件来指导如何构建工程。

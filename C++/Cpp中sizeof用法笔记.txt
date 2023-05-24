@@ -1,11 +1,13 @@
 描述：
 sizeof 给出操作数类型的一个对象所需要的存储空间，以字节为单位。
-> The 'sizeof' operator gives the amount of storage, in bytes, required to store an object of the type of the operand
+
+> The `sizeof` operator gives the amount of storage, in bytes, required to store an object of the type of the operand
 
 注意：
- - 如果提供给sizeof的是数组标识符，那么sizeof结果是整个数组所占用的空间，而不是该数组名表示的指针所占的空间。
- - 如果提供给sizeof的是一个struct 或者 union 类型名，或者struct 或 union的标识符，sizeof 的结果是struct 或者 union所占的字节数，
-包括数据本身大小和用来对齐的填充。因此，sizeof的结果不一定等于struct中各个成员所占空间直接相加的结果。
-如果struct 中的最后一个成员是一个没有指定大小的数组，那么该数组不计算在sizeof的结果内。
+
+- 如果提供给sizeof的是数组标识符，那么sizeof结果是整个数组所占用的空间，而不是该数组名表示的指针所占的空间。
+- 如果提供给sizeof的是一个struct 或者 union 类型名，或者struct 或 union的标识符，sizeof 的结果是struct 或者 union所占的字节数，
+  包括数据本身大小和用来对齐的填充。因此，sizeof的结果不一定等于struct中各个成员所占空间直接相加的结果。
+  如果struct 中的最后一个成员是一个没有指定大小的数组，那么该数组不计算在sizeof的结果内。
 
 - 如果是一个空类class, sizeof()返回的结果是1。

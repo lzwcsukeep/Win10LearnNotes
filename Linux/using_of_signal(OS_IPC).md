@@ -50,7 +50,7 @@ job 可以分为前台和后台运行。任何时刻最多只有一个前台job�
 
 **进程组**
 
-若干相关进程组成一个进程组，每个进程都属于且仅仅属于一个进程组，该进程组由进程组ID标识。
+若干相关进程的集合形成一个进程组，每个进程都属于且仅仅属于一个进程组，该进程组由进程组ID标识。
 
 ```c
 pid_t getpgrp(void)  // 返回调用进程的进程组id
@@ -59,7 +59,7 @@ pid_t getpgrp(void)  // 返回调用进程的进程组id
 默认情况下子进程属于父进程所在的进程组。
 
 ```c
-int setpgid(pid_t pid,pid_t pgid);
+int setpgid(pid_t pid,pid_t pgid); //设置进程pid的进程组id为pgid
 ```
 
 把进程pid 的进程组设置为pgid，如果pid = 0 ,则使用当前进程的PID，如果pgid = 0 ，则使用pid指定的进程的PID 为进程组ID 。
@@ -100,9 +100,7 @@ int setpgid(pid_t pid,pid_t pgid);
 
 - 忽视该信号
 
-一个进程可以使用**signal**函数修改一个信号的默认action,唯二的例外是SIGSTOP和SIGKILL，这两者的默认action 不能修改。
-
-
+一个进程可以使用**signal**函数修改一个信号的默认action,唯二的例外是**SIGSTOP**和**SIGKILL**，这两者的默认action 不能修改。
 
 ### 屏蔽与解屏蔽信号
 
@@ -144,4 +142,6 @@ sigismember(const sigset_t *set, int signum)判定信号signum是否在set指向
 
 阻塞信号的相关API详细用法看[linux系统编程之信号（五）：信号集操作函数，信号阻塞与未决 - mickole - 博客园](https://www.cnblogs.com/mickole/p/3191281.html)
 
+#### 信号集速查表
 
+<img title="" src="file:///E:/Files/LearnNotes/img_src/linux_signal_set.png" alt="" data-align="inline">
