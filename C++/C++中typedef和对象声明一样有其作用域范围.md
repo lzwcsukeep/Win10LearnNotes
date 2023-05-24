@@ -1,6 +1,6 @@
 #### A `typedef` is scoped exactly as the object declaration would have been, so it can be file scoped or local to a block or (in C++) to a namespace or class.
 
-也就是说typedef 和变量一样遵循作用域规则。  不同作用域下不同类型有同样的别名时会遵循就近原则，同一作用域下不同类型有相同的别名时会报错(同变量的声明行为一致)。(如有不懂看reference)
+也就是说typedef 和变量一样遵循作用域规则。  允许不同作用域下不同类型起同样的别名，这时采用哪个实际类型会遵循就近原则，同一作用域下不同类型起相同的别名时会报错(同变量的声明行为一致)。(如有不懂看reference)
 
 ### Scope of typedef in C
 
