@@ -9,7 +9,7 @@ this is some notes when I read the output of command `info info`.
 ## normal read 
 we can use UP and DOWN arrow to read it normal.
 
-BACKSPACE to scroll forward a full screen
+SPACE to scroll forward a full screen
 
 DEL to scroll backward a full screen.
 

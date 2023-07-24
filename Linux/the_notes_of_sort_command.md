@@ -16,8 +16,6 @@ description about sort command :
 
 （sort 遵循的排序原则：数字在前，然后是大写字母，然后是字母表顺序）
 
-
-
 what can sort command do :
 
 1. To sort an oridinary text file line by line
@@ -190,8 +188,6 @@ $ sort -o output.txt file.txt
 Note: Neither one has an advantage over the other. 
 ```
 
-
-
 **Application and uses of sort command:**
 
 1. It can sort any type of file be it table file text file numeric file and so on.
@@ -200,7 +196,3 @@ Note: Neither one has an advantage over the other.
 4. So many options are available for sorting in all possible ways.
 5. The most beneficial use is that a particular data file can be used many times as no change is made in the input file provided.
 6. Original data is always safe and not hampered.
-
-
-
-

@@ -1,0 +1,13 @@
+下载vim-plug
+
+然后在vimrc文件里设置
+plug#begin()
+
+//中间是安装各种插件的地方
+
+plug#end()
+
+
+最后重新加载.vimrc文件，并在vim中执行PlugInstall命令
+
+安装完插件配合键映射 map，可以将vim变的非常好用。
