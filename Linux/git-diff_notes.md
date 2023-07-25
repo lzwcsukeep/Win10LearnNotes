@@ -15,3 +15,4 @@ same(between no option and with option --staged).
 
 一个是比较当前工作区和staged area来看看你有哪个没有提交到暂存区，
 一个是比较暂存区和上次提交来看看这次准备提交的东西有什么区别。
+untracked file 不属于git的working tree!!!!!
