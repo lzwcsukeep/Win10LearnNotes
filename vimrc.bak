@@ -41,7 +41,8 @@ set viewoptions=folds
 " set colorscheme=elflord 
 colorscheme darkblue 
 colorscheme wildcharm 
-
+" this set make vim can use :Man command
+runtime ftplugin/man.vim
 filetype indent on 
 " useful for checking where has folds.
 " set foldcolumn=2
@@ -85,3 +86,6 @@ call plug#end()
 " let g:airline_right_sep='<'
 let g:airline_section_z = "%p%% : \ue0a1:%l/%L: CN:%c"
 " let g:airline_section_z = "%p%% : ln:%l/%L,cn:%c"
+
+" To use a new tab open :Man command. 
+let g:ft_man_open_mode = 'tab'
