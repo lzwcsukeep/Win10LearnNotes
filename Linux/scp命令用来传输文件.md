@@ -28,9 +28,7 @@ scp根据地址有没有冒号`:`来区分本地机器还是远端机器。因�
 > 
 > Local files should be specified using an absolute or relative path, while remote file names should include a user and host specification
 
-
-
-- 当需要传输目录是option 加上`-r`
+- 当需要传输目录时option 加上`-r`
 
 - 当两个远端机器之间传送时，是两个远端之间直接发送的，文件不会经过执行scp命令的机器， 如果需要拷贝的文件经过执行scp命令的机器，加上`-3` option。
 
@@ -38,5 +36,3 @@ scp根据地址有没有冒号`:`来区分本地机器还是远端机器。因�
 
 Ref:
 [How to Use SCP Command to Securely Transfer Files.](https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files/)
-
-
