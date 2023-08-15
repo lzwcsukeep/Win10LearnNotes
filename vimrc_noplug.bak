@@ -1,0 +1,101 @@
+set nocompatible
+set backspace=indent,eol,start
+set nu
+syntax enable
+" Set shift width to 4 spaces.
+set shiftwidth=4
+"
+" " Set tab width to 4 columns.
+set tabstop=4
+"
+" " Use space characters instead of tabs.
+set expandtab
+set scrolloff=4
+set showcmd
+set showmode
+
+" smart case-sensitive search
+set ignorecase
+set smartcase
+" incremental search (as string is being typed)
+set incsearch
+" Unbind some useless/annoying default key bindings.
+" 'Q' in normal mode enters Ex mode. You almost never want this.
+nmap Q <Nop>
+
+" Disable audible bell because it's annoying.
+set noerrorbells visualbell t_vb=
+set norelativenumber
+
+" open new split panes to right and bottom, which feels more natural
+set splitright
+
+" toggle relative numbering
+nnoremap <C-n> :set rnu!<CR>
+set path+=/usr/include/**
+" change the effect of the :mkview command.It is a comma-separated list of
+" word.the default is :"folds,options,cursor,curdir".
+" this setting only save and restore mannually created folds,opened/closed folds.
+set viewoptions=folds
+" set colorscheme=elflord 
+colorscheme elflord 
+set cursorline
+" set the cursorline and Cursorline number style to be same as CursorColumn
+hi clear CursorLine
+hi link CursorLine CursorColumn
+hi clear CursorLineNr
+hi link CursorLineNr CursorColumn
+" augroup cursorline
+"   au!
+"   au ColorScheme * hi clear CursorLine
+"                \ | hi link CursorLine CursorColumn
+" augroup END
+
+" this set make vim can use :Man command
+runtime ftplugin/man.vim
+filetype indent on 
+" useful for checking where has folds.
+" set foldcolumn=2
+
+" set cindent
+
+"" STATUS LINE ------------------------------------------------------------ {{{
+"
+"" Clear status line when vimrc is reloaded.
+"set statusline=
+"
+"" Status line left side.
+"set statusline+=\ %F\ %M\ %Y\ %R
+""
+"" Use a divider to separate the left side from the right side.
+"set statusline+=%=
+"
+"" Status line right side.
+"set statusline+=\ ascii:\ %b\ hex:\ 0x%B\ row:\ %l\ col:\ %c\ percent:\ %p%%
+"
+"" Show the status on the second to last line.
+"" Always show the status line whenever the number of windows open.
+"set laststatus=2
+"
+"" " }}}
+
+"Plug ---------------------------------------------------------------------
+"
+" call plug#begin()
+" Plug 'git@gitee.com:rulei_mirror/vim-airline.git'
+" Plug 'git@gitee.com:yaozhijin/nerdtree.git'
+" Plug 'git@gitee.com:jxsylar/ctrlp.vim.git'
+" Plug 'git@gitee.com:jhrjh/vim-airline-themes.git'
+" Plug 'git@gitee.com:yaozhijin/tagbar.git'
+" " Plug 'git@gitee.com:lordyung/YouCompleteMe.git', { 'do': './install.py --tern-completer' }
+" " Plug 'preservim/nerdtree'
+" " Plug 'vim-airline/vim-airline-themes'
+" call plug#end()
+" 
+" " let g:airline_left_sep='>'
+" " let g:airline_right_sep='<'
+" let g:airline_section_z = "%p%% : \ue0a1:%l/%L: CN:%c"
+" " let g:airline_section_z = "%p%% : ln:%l/%L,cn:%c"
+
+" To use a new tab open :Man command. 
+let g:ft_man_open_mode = 'tab'
