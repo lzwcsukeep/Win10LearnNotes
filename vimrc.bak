@@ -33,6 +33,10 @@ set splitright
 " toggle relative numbering
 nnoremap <C-n> :set rnu!<CR>
 set path+=/usr/include/**
+<<<<<<< HEAD
+=======
+set cursorline
+>>>>>>> 356b78e1018698ddf15f2677843d0e5268944b55
 " change the effect of the :mkview command.It is a comma-separated list of
 " word.the default is :"folds,options,cursor,curdir".
 " this setting only save and restore mannually created folds,opened/closed folds.
