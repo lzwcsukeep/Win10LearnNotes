@@ -1,0 +1,4 @@
+# setting add by you.
+PS1="[\[\e[32;40m\]\u\[\e[37;40m\]@\h \[\e[36;40m\]\w\[\e[0m\]]\$ "
+export TERM=xterm-256color
+export EDITOR=vim
