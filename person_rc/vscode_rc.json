@@ -145,7 +145,8 @@
     },
     {
         "key": "alt+right",
-        "command": "workbench.action.nextEditor"
+        "command": "workbench.action.nextEditor",
+        "when": "!terminalFocus"
     },
     {
         "key": "ctrl+pagedown",
@@ -153,7 +154,8 @@
     },
     {
         "key": "alt+left",
-        "command": "workbench.action.previousEditor"
+        "command": "workbench.action.previousEditor",
+        "when": "!terminalFocus"
     },
     {
         "key": "ctrl+pageup",
@@ -187,5 +189,15 @@
         "key": "ctrl+n",
         "command": "explorer.newFile",
         "when": "explorerViewletFocus"
+    },
+    {
+        "key": "alt+down",
+        "command": "-workbench.action.terminal.focusNextPane",
+        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
+    },
+    {
+        "key": "alt+up",
+        "command": "-workbench.action.terminal.focusPreviousPane",
+        "when": "terminalFocus && terminalHasBeenCreated || terminalFocus && terminalProcessSupported"
     }
 ]
