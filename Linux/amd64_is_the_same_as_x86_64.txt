@@ -1,0 +1,15 @@
+Q：What is the difference between x86_64 and AMD64?
+A:They are the same.
+
+AMD was the first to create 64-bit extensions to the x86 instruction set. 
+(Intel at the moment decided to go a different path, developing IA64 with HP, practically co-opting HP’s PA-RISC CPUs to become Itanium CPUs).
+
+The Open Source community appreciates AMD’s breakthrough and 
+decided to give the code name of “amd64” to the extensions (to prevent confusion with Intel’s 64-bit instruction set “ia64”).
+
+Intel naturally doesn’t like this situation and ‘gently’ ‘suggested’ an alternative, more vendor-neutral moniker of “x86_64”. 
+Some Open Source community took the bait and changed the moniker. Others don’t see the need to change and keep using the “amd64” moniker.
+
+But for all practical purposes with no exceptions, the two monikers — “x86_64” and “amd64” — are exactly the same.
+---
+answer from Quora.

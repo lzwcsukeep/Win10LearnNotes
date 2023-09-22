@@ -1,0 +1,5 @@
+**Question**: I have a new [Linux](http://www.internetblog.org.uk/tag/linux) dedicated server, and I have read a lot of documentation referring to packages. What are Linux packages?
+
+**Answer**: In Linux distributions, a “package” refers to **a compressed file archive containing all of the files that come with a particular application.** The files are usually stored in the package according to their relative installation paths on your system. Most packages also contain installation instructions for the OS, as well as a list of any other packages that are dependencies (prerequisites required for installation.
+
+Common types of Linux packages include .deb, .rpm, and .tgz. Since Linux packages do not usually contain the dependencies necessary to install them, many Linux distributions use package managers that automatically read dependencies files and download the packages needed before proceeding with the installation. Some examples of package managers are APT, [YUM](http://www.internetblog.org.uk/tag/yum), and Pacman.
