@@ -89,7 +89,7 @@ int main() {
 
     // 使用std::async异步地启动任务，并将返回的std::future赋值给之前创建的对象
     futureResult = std::async(addNumbers, 5, 10);
-    
+
     // 执行其他操作
     for (int i = 0 ; i < 10; i++)
     {
@@ -102,57 +102,4 @@ int main() {
 
     return 0;
 }
-
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

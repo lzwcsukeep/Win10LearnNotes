@@ -104,7 +104,3 @@ prog.cpp:23:23: error: could not convert ‘10’ from ‘int’ to ‘Demo’
 By specifying the C++ explicit keyword before the constructor, we are telling the class to not perform any implicit operations. Thus, the integer 10 is not getting converted to the type Demo class anymore. This is why the compiler throws an error.
 
 ref:[What is explicit in C++? - Scaler Topics](https://www.scaler.com/topics/cpp-explicit/)
-
-
-
-
