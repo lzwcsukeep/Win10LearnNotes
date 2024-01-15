@@ -6,23 +6,29 @@
 
 2.c++ 类模板？
 
-就如函数模板一样，我们也可以设计类模板，允许类的成员（类的方法或者变量）使用模板参数(templates 关键字后一对尖括号里的参数)作为类型。换句话说，在模板参数里的类型可以在类中的成员方法或者属性中使用。在使用类模板时在指定确定的类型。也能达到代码复用的效果。
+就如函数模板一样，我们也可以设计类模板，允许类的成员（类的方法或者变量）使用模板参数(templates 关键字后一对尖括号里的参数)作为类型。
+
+换句话说，在模板参数里的类型可以在类中的成员方法或者属性中使用。在使用类模板时在指定确定的类型。也能达到代码复用的效果。
 
 声明类模板：
 使用关键字template.
 语法格式：
- template <class T>
+
+template <class T>
 class myClass{
 T m_var;
 T m_func(T &t) { ... } 
   ....
 }
+
 即前面用template <class T> 说明之后，后面就同普通类的声明差不多了，只不过T 可以在类中当作具体类型使用。
 
 3.类模板特化(Template specialization)
 
 在模板基础上，有可能我们需要创造一个类，这个类针对确定的类型，在具有模板类的提供的方法，变量基础上还具有不同的其他方法，这个时候就可以用到类的特化。
-For example, let's suppose that we have a very simple class called mycontainer that can store one element of any type and that has just one member function called increase, which increases its value. But we find that when it stores an element of type char it would be more convenient to have a completely different implementation with a function member uppercase, so we decide to declare a class template specialization for that type:
+For example, let's suppose that we have a very simple class called mycontainer that can store one element of any type and that has just 
+one member function called increase, which increases its value. But we find that when it stores an element of type char it would be more 
+convenient to have a completely different implementation with a function member uppercase, so we decide to declare a class template specialization for that type:
 ——————————————————————————
 // template specialization
 #include <iostream>
