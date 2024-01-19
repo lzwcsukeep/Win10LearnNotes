@@ -2,8 +2,6 @@
 
 ...
 
-
-
 控制gpio引脚
 
 下面sh指令使用GPIO sysfs接口控制gpio引脚，150是上面计算出来的gpio引脚编号
