@@ -66,8 +66,6 @@ sed address表示命令作用的范围。范围可以用逗号隔开。
 
 所有匹配了的行，都是在模式空间内去执行相应的命令处理。
 
-
-
 ref :
 
 gnu sed 手册 ： https://www.gnu.org/software/sed/manual/sed.html
