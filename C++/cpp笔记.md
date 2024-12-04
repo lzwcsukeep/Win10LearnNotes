@@ -40,3 +40,8 @@ class A
 
 > Non-static member functions can access all data members of the class: static and non-static.
 > Static member functions can only operate on the static data members.
+
+### 多态类
+
+继承体系下，一个类至少有一个虚函数的类叫做多态类。
+ polymorphic class (i.e., at least one virtual function declared in the class).

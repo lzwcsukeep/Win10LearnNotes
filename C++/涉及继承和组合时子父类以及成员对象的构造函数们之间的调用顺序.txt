@@ -1,0 +1,78 @@
+C++中当一个类继承了父类，并且类的属性成员包含了其他类的对象时，该类的对象定义时肯定需要调用各个构造器来初始化对象，
+值得探讨的是各个构造器的调用顺序。
+
+C++子类对象初始化时，父类和成员对象以及自身构造函数和析构函数的调用顺序为：
+
+构造函数：
+
+1.父类构造函数(有多个按声明顺序)
+2.成员对象的构造函数(有多个按声明顺序) 
+3.自身构造函数
+
+析构函数：
+
+和构造函数调用顺序相反。
+
+对于1.
+当该类继承了多个父类(多重继承)，这一级的父类构造按声明顺序调用。
+当该类含有多级继承，即父类继承了祖父类，则先调用祖父类构造函数。也就是多级继承，先调用在继承链中最上面的( 辈分最大的)父类的构造函数。
+
+上述两种情况的规则结合，就可以推断出所有父类的构造函数的调用顺序。
+
+对于1.
+
+当想要调用父类的含参数的构造函数时，需要显式的指明。注意一下两点。
+- 当子类的默认构造调用时，父类的默认构造会自动的被调用，如果父类不存在默认构造，则报错。
+- 在子类的含参构造中调用父类的含参构造，我们需要显式的调用。
+
+```cpp
+// C++ program to show how to call parameterized Constructor 
+// of base class when derived class's Constructor is called 
+
+#include <iostream> 
+using namespace std; 
+
+// base class 
+class Parent { 
+	int x; 
+
+public: 
+	// base class's parameterized constructor 
+	Parent(int i) 
+	{ 
+		x = i; 
+		cout << "Inside base class's parameterized "
+				"constructor"
+			<< endl; 
+	} 
+}; 
+
+// sub class 
+class Child : public Parent { 
+public: 
+	// sub class's parameterized constructor 
+	Child(int x): Parent(x) 
+	{ 
+		cout << "Inside sub class's parameterized "
+				"constructor"
+			<< endl; 
+	} 
+}; 
+
+// main function 
+int main() 
+{ 
+
+	// creating object of class Child 
+	Child obj1(10); 
+	return 0; 
+}
+```
+output:
+Inside base class's parameterized constructor
+Inside sub class's parameterized constructor
+
+Important Points: 
+
+- Whenever the derived class’s default constructor is called, the base class’s default constructor is called automatically.
+- To call the parameterized constructor of base class inside the parameterized constructor of sub class, we have to mention it explicitly.

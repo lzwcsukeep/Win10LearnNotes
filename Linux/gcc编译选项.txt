@@ -6,7 +6,7 @@ These options specify directories to search for header files, for libraries and 
 -iquote dir
 -isystem dir
 -idirafter dir
-           Add the directory dir to the list of directories to be searched for header files during preprocessing.  If dir begins with = or $SYSROOT, then the = or $SYSROOT is replaced by the
+           Add the directory dir to the list of directories to be searched for `header files` during preprocessing.  If dir begins with = or $SYSROOT, then the = or $SYSROOT is replaced by the
            sysroot prefix; see --sysroot and -isysroot.
     
            Directories specified with -iquote apply only to the quote form of the directive, "#include "file"".  Directories specified with -I, -isystem, or -idirafter apply to lookup for both the
@@ -49,11 +49,16 @@ These options specify directories to search for header files, for libraries and 
            The linker searches a standard list of directories for the library.  The directories searched include several standard system directories plus any that you specify with -L.
 
            Static libraries are archives of object files, and have file names like liblibrary.a.  Some targets also support shared libraries, which typically have names like liblibrary.so.  If both
-           static and shared libraries are found, the linker gives preference to linking with the shared library unless the -static option is used.
+           static and shared libraries are found, the linker gives preference to linking with the shared library unless the -static option is used.(如果存在同名的静态库和共享库，优先共享库除非使用了-static)
 
            It makes a difference where in the command you write this option; the linker searches and processes libraries and object files in the order they are specified.  Thus, foo.o -lz bar.o
            searches library z after file foo.o but before bar.o.  If bar.o refers to functions in z, those functions may not be loaded.
 上述两个编译选项互相配合，在链接时搜索名字为`library`的库。大写`-L`增加要搜索的目录，小写`-l`指定要搜索的库名。
+对`-L` 和 `-l` 两个选项来说，顺序有影响。
+
+-shared
+           Produce a shared object which can then be linked with other objects to form an executable.  Not all systems support this option.  For predictable
+           results, you must also specify the same set of options used for compilation (-fpic, -fPIC, or model suboptions) when you specify this linker option.[1]
 
 from man gcc.
 

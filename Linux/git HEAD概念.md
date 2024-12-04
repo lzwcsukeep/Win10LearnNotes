@@ -6,8 +6,6 @@ HEAD 引用的是一个特定的提交，而不是一个有名字的分支，这
 > 
 > In fact, we can perform all the normal Git operations.
 
-
-
 对于detached HEAD state 我们可以执行所有的正常git 操作。但是如果我们切换回其他分支，在 git 里面基于detached HEAD state 创建的分支由于没有命名分支的索引，会被git 的垃圾搜集器删除掉。
 
 > ```bash
@@ -29,7 +27,3 @@ HEAD 引用的是一个特定的提交，而不是一个有名字的分支，这
 > $ git branch foo                                 (2)
 > $ git tag foo                                    (3)
 > ```
-
-
-
-

@@ -144,4 +144,4 @@ sigismember(const sigset_t *set, int signum)判定信号signum是否在set指向
 
 #### 信号集速查表
 
-<img title="" src="file:///E:/Files/LearnNotes/img_src/linux_signal_set.png" alt="" data-align="inline">
+![](../img_src/linux_signal_set.png)

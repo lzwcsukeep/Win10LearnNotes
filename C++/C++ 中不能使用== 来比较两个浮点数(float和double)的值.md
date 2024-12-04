@@ -10,7 +10,7 @@ Here’s one example of the inexactness that can creep in:
 float f = 0.1f;
 float sum;
 sum = 0;
-
+// 三种不同的计算1的方法得出的结果不一样
 for (int i = 0; i < 10; ++i)
     sum += f;
 float product = f * 10;
@@ -23,3 +23,5 @@ This code tries to calculate ‘one’ in three different ways: repeated adding,
 > sum=1.000000119209290, mul=1.000000000000000, mul2=1.000000014901161
 
 Disclaimer: the results you get will depend on your compiler, your CPU, and your compiler settings, which actually helps make the point.
+
+因此判断浮点数使用 == 是不可靠的，应该使用 fabs(a-b) < epsinon 的形式。epsinon是一个比较小的值，当两个浮点数的差小于这个值时认为相等。

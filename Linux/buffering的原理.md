@@ -1,8 +1,14 @@
 ### IO buffer 的笔记：
 
+buffer是在内存里面，read,write都是对磁盘操作。
+
+有了buffer之后，尽管只读一个字节，但是可以先从磁盘读一大片放在buffer里面。
+
+尽管只写一个字节，可以先写到buffer里面，达到一定数量，再一次性写入。上面两个buffer不是同一个buffer?
+
 - buffer 发生在内存与磁盘之间进行数据交换时。
 
-- 如果没有buffer,那么每次执行一个read,write都会执行一次系统调用。
+- 如果没有buffer,那么每次执行一个read,write(对象都是磁盘)都会执行一次系统调用。
 
 - 有了buffer 之后，每次read，write 时都不立刻进行磁盘操作，而是先把数据放到buffer 里面，等达到一定条件时在一次性写入大量数据。
 
@@ -15,16 +21,13 @@
 The standard I/O library provides three types of buffering:
 
 1. **Fully Buffered**: Data is read or written in large chunks (e.g., 4 KB or 8 KB) until the buffer is filled or flushed.
+
 2. **Line Buffered**: Data is read or written line by line, meaning that it waits until a newline character (`\n`) is encountered before performing the I/O operation.
+
 3. **Unbuffered**: Data is read or written directly without buffering. Each read or write operation directly corresponds to a system call.
-
-
-
 - 当使用`fread`, `fwrite`, `fprintf`, or `fscanf` 时, the library manages the buffering for you behind the scenes.The application doesn't need to explicitly manage or implement buffering; the library takes care of it.
 
 - 可以使用`fflush`函数，手动刷新缓存而不等待条件满足时才清空缓存。
-
-
 
 下面是详细的Buffer 工作流程：
 
@@ -55,10 +58,6 @@ Benefits of buffering include:
 - Minimizing contention for shared resources like disk I/O, which can improve overall system performance.
 
 However, buffering also introduces some considerations, such as the possibility of data loss if the system crashes before buffered data is written to disk, or the need to explicitly flush buffers in certain cases to ensure data integrity. Understanding how buffering works is crucial for writing efficient and reliable I/O code.
-
-
-
-
 
 Links:
 

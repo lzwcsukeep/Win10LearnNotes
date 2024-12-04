@@ -37,14 +37,8 @@ wait, waitpid, waitid - wait for process to change state
 
 在上述子进程中止的情况，执行一个wait()可以让系统释放掉该子进程的资源。如果一个wait()没有执行，那么终止的子进程会保持一个"僵尸"状态(zombie state)。
 
-
-
 重点：父进程(调用wait()函数的进程）用来等待某个子进程状态改变。
 
 详见Refer below：
 
 [wait(2) - Linux manual page](https://man7.org/linux/man-pages/man2/waitpid.2.html)
-
-
-
-
