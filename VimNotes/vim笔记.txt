@@ -1,3 +1,0 @@
-#vim 帮助文档里的术语
-
-option : vim 的option是可以写进 .vimrc的那种option比如set number，不是通常的shell命令可以带的option,这两个不一样，不要搞混了。

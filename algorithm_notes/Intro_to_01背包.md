@@ -1,0 +1,2 @@
+1. Introduction to the 0/1 Knapsack Problem
+   The 0/1 Knapsack Problem is a fundamental problem in computer science and optimization. **It’s called “0/1” because for each item, you have two choices: take it (1) or leave it (0).** This problem is an excellent example of how dynamic programming can be used to solve complex optimization problems efficiently.

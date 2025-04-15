@@ -1,7 +1,0 @@
-\[\033[32m\]\u@\h \[\033[33m\]\w\[\033[36m\]`__git_ps1`\[\033[0m\]\n$
-## 最初始的PS1的值
-\[\033]0;$TITLEPREFIX:$PWD\007\]\n\[\033[32m\]\u@\h \[\033[35m\]$MSYSTEM \[\033[33m\]\w\[\033[36m\]`__git_ps1`\[\033[0m\]\n$
-
-## whatis ps1 file for?
-## ps1 file records the original prompt state for you .
-\[\033[32m\]\u@\h \[\033[33m\]\w\[\033[36m\] (main)\[\033[0m\]\n$

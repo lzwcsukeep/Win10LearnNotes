@@ -5,5 +5,3 @@ vector 底层是由一段连续的空间保存数据的。vector与array 非常�
 vector 可以看成是会自动增长空间的数组，因为vector 可以随机寻址。
 
 详细可以参考<\<STL源码剖析\>> 这本书，有关于vector 的一切。
-
-

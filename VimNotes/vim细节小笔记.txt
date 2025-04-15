@@ -1,0 +1,51 @@
+#vim 帮助文档里的术语
+
+option : vim 的option是可以写进 .vimrc的那种option比如set number，不是通常的shell命令可以带的option,这两个不一样，不要搞混了。
+
+# vim 正则表达式和其他的正则表达式有一些区别。
+
+在 vim 的pattern match 里面 '+' 就表示'+' 这个字符本身而 '\+' 是量词，表示前面一个字符出现一次或者多次。即 `a+b` 就匹配a+b ,而 `a\+b` 匹配 ab,aab,aaab,...
+但是grep 的正则表达式里 '+' 就是量词。即 a+b 匹配 ab,aab,aaab,... 
+
+# vim 里面可以使用 `:s/$/words/` 的方式在行的末尾添加文本。
+
+同理 将上面的`$`替换成`^` 就变成了在行首添加。没有任何副作用,替换之后行尾的`$` 还在。
+
+# vim 搜索文件的有两种方向。
+
+'path' 和 'tags' 选项会用到搜索文件。
+
+搜索文件有两种方向，向上搜索和向下搜索。
+
+1. 向上搜索
+向上搜索使用符号` ; ` ,  分号` ;` 后面紧跟着的是向上搜索的终止目录命令，如果不跟，那么就一直搜索到根目录`/` 。
+如 
+```
+     /usr/include/sys;/usr
+   will search in:
+           /usr/include/sys
+           /usr/include
+           /usr
+``` 
+这里面的 /usr/include/sys 是起始搜索目录， /usr 是终止搜索目录,终止目录是 `;` 的选项。
+
+2. 向下搜索
+
+有两个特殊的符合： `*` 和 `**`  
+
+`*` 出现在搜索路径中比较简单，就是匹配0个或任意多个字符。
+`**` 比较复杂，有以下几点注意：
+- 只匹配目录
+- 只能在路径Path的最后 或者后面只能紧接着路径分隔符`/` 或者 数字+路径分隔符。
+即用法只能有.../path/** 或者 **/ 或者 **2/ ，其中**2/ 中的2 表示最多向下走两级目录。(默认是100)
+---
+Thus '/usr/**2' can match:
+                /usr
+                /usr/include                                                                                                                                 
+                /usr/include/sys
+                /usr/include/g++
+                /usr/lib
+                /usr/lib/X11
+                ....
+It does NOT match '/usr/include/g++/std' as this would be three evels.
+ ---

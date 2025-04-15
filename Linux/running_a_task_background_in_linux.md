@@ -48,33 +48,3 @@ nohup: ignoring input and appending output to 'nohup.out'
 ```
 
 If you log out or close the terminal, the process is not terminated.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

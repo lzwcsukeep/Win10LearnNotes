@@ -110,10 +110,20 @@ output
 
 Because the variable `n` is captured by value, its value remains 0 after the call to the lambda expression. The mutable specification allows `n` to be modified within the lambda.
 
+**Notes:**
+
+When you use the capture clause, we recommend that you keep these points in mind, particularly when you use lambdas with multi-threading:
+
+- Reference captures can be used to modify variables outside, but value captures can't. (**`mutable`** allows copies to be modified, but not originals.)
+
+- Reference captures reflect updates to variables outside, but value captures don't.
+
+- Reference captures introduce a lifetime dependency, but value captures have no lifetime dependencies. It's especially important when the lambda runs asynchronously. If you capture a local by reference in an async lambda, that local could easily be gone by the time the lambda runs. Your code could cause an access violation at run time.
+
 # reference link
 
 (https://learn.microsoft.com/en-us/cpp/cpp/lambda-expressions-in-cpp?view=msvc-170)
 
 (https://www.geeksforgeeks.org/lambda-expression-in-c/)
 
-(https://www.cnblogs.com/DswCnblog/p/5629165.html)
+(https://www.cnblogs.com/DswCnblog/p/5629165.html)                                

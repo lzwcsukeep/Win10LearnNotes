@@ -48,8 +48,6 @@ Addition of two number = 3
 
 We can see that in the code INT is using with typedef for two different types int and char *. We are not getting compiler error because both INT has a different meaning in different scope. Globally INT behaves like int but in the main function, it behaves like the char *.
 
-
-
 也就是说typedef 和变量一样遵循作用域规则。
 
 ### typedef vs #define
@@ -59,12 +57,8 @@ We can see that in the code INT is using with typedef for two different types in
 - typedef is ended with semicolon while #define does not terminate with a semicolon.
 - typedef is used to give a new symbolic name to the existing type while #define is used to create an alias of any type and value.
 
-
-
 reference:
 
 [c++ - Please explain syntax rules and scope for &quot;typedef&quot; - Stack Overflow](https://stackoverflow.com/questions/2427739/please-explain-syntax-rules-and-scope-for-typedef)
 
 https://aticleworld.com/typedef-in-c/
-
-

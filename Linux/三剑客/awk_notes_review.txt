@@ -1,0 +1,25 @@
+awk 的一些重点：
+
+1. awk 的语法基本格式： awk 'program' input_file...
+
+program 由一些的rules组成：
+即：program 为，rule 之间用换行符隔开(Newlines usually separate rules.)
+    
+    rule 
+    rule
+    ...
+
+一个rule = pattern {action} ;
+
+因此 program 等于如下：
+pattern {action}
+pattern {action}
+pattern {action}
+...
+
+pattern 时匹配要处理的行，action是要对匹配的行进行的动作。
+
+2. awk 默认是按行处理文本数据的，一行叫做一个record,每次读入一行时，awk 会自动将该行解析成若干字段，
+默认是按whitespace 确定字段。并且可以使用$数字 引用划分后的字段。特别的$0 表示该行本身。
+
+3. 是的,awk 最简单的用法就是只需要知道上述两点即可。
