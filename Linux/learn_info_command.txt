@@ -17,12 +17,24 @@ command 'p' for previous node,command 'n' for next node.
 
 command 'b' for going to the begining
 
+command 'e' for going to the end
+
+command 'l' for going the most recently selected node
+
 command 'm' for going to a menu.type '?' to list all menu you can go.
 
 command 'f' followed by a name to go to a cross reference. type '?' to list all cross reference 
 you can go.
 
-command 'ctrl-g' to cancel command 'm' or command 'f'.
+command 'ctrl-g' to cancel current command.
+## searching
+
+command 's' or '/' to read a string and search it.
+
+command '}' to search the same string next,i.e. repeat last search in the same direction.
+
+command '{' to search the same string previously,i.e. repeat last search in the reverse direction.
+
 ## cross reference and return
 
 when we read something is link referring to another document.we can type <ENTER>
