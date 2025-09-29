@@ -1,0 +1,10 @@
+vscode 远程登陆时， ~/.ssh/config 配置意义：
+
+Host       配置块的别名或匹配规则，写法灵活，不一定非写 IP，可以写名字、别名。 VS Code Remote SSH 连接时会读取这里的值。
+HostName 	实际连接的服务器地址或域名
+User              登录服务器的用户名
+
+简化理解：
+Host 是你在命令或 VS Code 中输入的快捷名或标识。
+HostName 是 SSH 真正要连接的地址。
+

@@ -1,0 +1,5 @@
+# reminder this file is not for a valued note,just your balabala nonsense words
+
+## vscode 使用公私钥登录就是快啊，私钥是放在win主机上的。 
+
+## vscode snippets 非常好用。完美。

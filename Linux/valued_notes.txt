@@ -1,0 +1,302 @@
+有用的经验：
+# 可以在Ubuntu 上 使用命令行的形式 checkout svn仓库或目录。
+
+# 即使不是使用lvm 创建的分区，可以无痛扩展磁盘空间。在图形界面下使用gparted即可完成。
+
+# 可以修改虚拟机的默认启动方式，图形化界面还是命令行界面。
+
+# less 使用 & 命令可以只显示匹配模式的行。退出这种模式使用 &+空格即可。
+
+# makefile 里面 recipes 部分使用$(call variable,param,param,...) ,$(call ...) 会直接在所在位置展开，也会成为一条或多条shell 指令。
+
+#当makefile 里面 target 的prerequisite 是空时，target 总是需要更新，即对应的recipes 一定执行。(理解错误，片面)
+关于  target 的prerequisite 是空的正确理解：
+1. 如果 target 文件不存在，则始终执行对应的recipes。 // 对应你的错误理解
+2. 如果target 文件已经存在且比 Makefile 新，Make 可能认为它是 up-to-date，而不执行 recipe，除非使用 .PHONY 或 make -B 强制执行。
+最明显的例子就是 make clean. 如果目录下已经有一个clean 文件，且时间戳比Makefile 新，那么不会执行清理的指令。
+让make clean 始终执行的方法就是 用.PHONY 。
+
+## extern "C" = “用 C 的方式公开这个函数给外部，保证跨语言或跨模块兼容。”
+因为C++ 会做Name Mangling即函数名会被改写（Name Mangling，目的是支持函数重载。
+例如，int foo(int) 可能被编译成 _Z3fooi。而 C 语言没有不会Name Mangling。
+dlsym() 会用到。
+
+### makefile 里面$(patsubst <pattern>,<replacement>,<text> ) 弄明白了
+
+### makefile  % 弄明白了
+
+### makefile 的target 和 prequisites 里面都可以带路径分隔符"/"。make 可以解析它,正确理解它。
+
+### 在 Makefile 中，**wildcard** 是一个 函数，用于获取匹配特定模式的文件列表，常用于自动收集源文件列表。
+语法格式：    $(wildcard PATTERN...)
+PATTERN 是一个 shell 文件匹配模式（如 *.c, src/*.cpp 等）
+它返回符合该模式的 文件列表
+官方描述：
+>$(wildcard pattern…)
+>This string, used anywhere in a makefile, is replaced by a space-separated list of names of existing files 
+>that match one of the given file name patterns.
+
+
+### C++ int main(int argc, char* argv[]){} 形式的主函数，argc = argument count , 把自身程序名也计算进去了。即 ./myapp foo bar 
+的 argc 等于 3 ， argv[0] = ./myapp argv[1]=foo , argv[2] = bar
+
+### int execvp(const char *file, char *const argv[]);
+execvp() 把当前进程替换成可执行程序file，argv是新进程的命令行参数。其中连argv[0] 也可以修改掉。
+execvp 实际加载哪个程序完全由file 决定，argv[0] 并不会影响实际加载哪个程序。
+execvp(包括其他exec 系列) 执行成功不会返回，因此成功的话execvp后面的代码不会执行。失败才会返回。
+
+
+### 记录一下ps 命令常见列的含义：
+
+pid : 进程Id, 该进程在系统中的唯一标识号。
+
+ppid: 父进程的pid, 这个进程的父进程的pid。
+
+cmd : 表示进程的完整启动命令，包括路径、参数、选项等,来源：进程的 argv[]。一般是最长最详细的一列
+
+comm:Command name,仅表示可执行文件的名字（不带路径、不带参数）。来源：内核中的 task_struct->comm 字段
+
+
+stat:表示进程当前的状态，可能包含一个或多个字符，含义如下: R- Running正在运行， S- Sleeping可中断睡眠， T-Stopped 停止 ,Z- Zombie 僵尸进程
+
+ps -o 选项可以选择显示的列， 示例 ps -eo pid,ppid,cmd 将只显示 pid,ppid,cmd 
+
+查看特定pid 的进程信息使用 -p pid 选项，示例 ： ps -p 714 将只看pid=714 的进程信息。使用 ps -p 714 -o pid,comm,cmd,stat 查看714进程选定的列。
+
+### 关于输入输出流的一些术语：
+operator << ， operator >> 在 istream ，ostream时定义的，因此只在继承体系之后的类才有 这些操作。
+
+operator << ：Insert formatted output  , 插入格式化输出。 视角是根据输出流对象来说的。
+operator >> :  Extract formatted input  ，提取格式化输入。视角也是根据流对象来说的。
+
+## 结论性： 7/24日早上花一个小时，大概捋了一下 c++ 里面的输入输出流。istream ,ostream, ifstream,ofstream,istringstream,ostringstream,fstream,
+stringstream...
+
+
+### 使用fork出来的子进程会继承父进程的所有打开文件描述符(open file descriptor), 而 socket 创建的套接字就是一种file descriptor,因此也会被继承。
+看socket()函数的官方描述：
+socket()  creates  an  endpoint for communication and returns a file descriptor that refers to that endpoint.  The file descriptor re‐
+       turned by a successful call will be the lowest-numbered file descriptor not currently open for the process.
+RETURN VALUE
+       On success, a file descriptor for the new socket is returned.  On error, -1 is returned
+即： 子进程会继承父进程打开的套接字。因为套接字本质就是一个文件描述符。
+
+
+### 服务端 调用 accept()监听某个listen_fd,并且会阻塞到这个位置，当有客户端连接时， accept() 会返回一个新的client_fd 用于通信。
+当 read(client_fd) 时 就是在接收对面发来的消息。
+当 write(client_fd)时 就是在发送消息给对面。
+当close(client_fd) 时，就是关闭双方通信的通道。
+
+## 注册关键点：
+
+内涵： 监听某个资源的某种状态，并设置对应的处理方式。
+要注册的内容：                                       意义
+一个文件描述符fd                                    你要监听哪个socket,管道，文件等资源
+一种事件(如可读可写)                               你想监听它什么状态变化
+回调函数                                                 如果这个事件发生了，调用哪个函数处理
+
+### 关于socketpair
+socketpair 仅在同一台机器上的进程之间有效，跨主机是完全不可行的。socketpair 不依赖IP和端口，而是通过内核中的内存结构或本地路径通信。
+socketpair() 是为**本机进程通信（IPC）**设计的，不能用于跨主机。跨主机通信请使用基于 IP 的 TCP/UDP 套接字。
+socketpair 创建两个套接字 sv[2] 之后直接就可以通信了。 不需要进行connect(), accept()。
+
+### 非常重要的认识
+epoll_wait 是“事件收集器”，不是“事件调度器”。它只收集哪些事件发生，然后放到struct epoll_event events[] 数组里面。
+对事件的调度逻辑，你自己去处理。看似简单粗暴，但也带来了巨大的灵活性。
+
+
+### 对于scpi:  使用套接字连接成功，直接从这个套接字发送文本形式的scpi命令就可以和仪器通信。
+注意： 发送文本形式的scpi命令的程序是客户端。
+
+### 一个C++ 模板的新用法
+Non-Type Template Parameter C++
+可以定义一个函数模板，模板参数是函数，使用的时候传具体的函数名过去用。
+Following are the arguments that are allowed:
+- Constant Expressions
+- Addresses of function or objects with external linkage
+- Addresses of static class members.
+
+在项目中也用到了。
+https://chatgpt.com/c/68872393-eca8-800a-a989-c3c12905f515
+
+### git 中 index 就是 暂存区 staging area 。
+
+### 关于 C++ 组合对象成员
+
+class B {
+    A a;
+public:
+    B(int x) : a(x) { } // a 是 A 类型成员，自动调用 A(int) 构造
+};
+
+要记住：初始化列表中 a(x) 就等价于构造函数里自动执行 A(x) —— 你不需要手动写 a = A(x)，这其实是赋值，不是构造。
+
+## vscode 免密码登录： 实际上就是使用公私钥自动认证，是win10 主机向虚拟机认证身份，因此ssh-ken 产生密钥对之后，
+私钥是放在win10 主机上的。并且vscode 配置里面设置好私钥的文件路径。 Linux上保存公钥。
+
+### C++ 中组合和聚合的区别
+一个类有另一个类的对象作为成员变量叫做组合（Composition）。
+一个类有另一个类的对象的指针或者引用叫做聚合（Aggregation）。
+# 组合（Composition）
+成员是对象本身（值语义），生命周期完全依赖外部类。
+
+外部类销毁时，成员对象也自动销毁。
+
+表示一种 “强拥有” 的关系（Has-a）。
+class Engine {
+public:
+    void start() {}
+};
+
+class Car {
+private:
+    Engine engine; // 组合
+};
+这里 Car 一定有一个 Engine，Engine 的生命周期跟 Car 一致
+
+# 聚合（Aggregation）
+成员是对象的指针或引用，外部类不负责管理它的生命周期。
+
+成员对象可能在外部被创建，外部类只是“引用”它。
+
+表示一种 “弱拥有” 或 “共享” 的关系。
+class Engine {
+public:
+    void start() {}
+};
+
+class Car {
+private:
+    Engine* engine; // 聚合
+public:
+    Car(Engine* e) : engine(e) {}
+};
+这里 Car 只是用 Engine，但不一定负责创建或销毁它。
+
+11. chatgpt 关于流程图的建议：
+
+函数调用流程：visio “基本流程图" Basic Flowchart
+画 C++ 项目中多个 .cpp 文件、类之间的关系图，也就是面向对象的结构关系图：“UML 类图”(UML Class Diagram)
+其他可选模板
+UML 包图 (Package Diagram)适合展示模块间依赖，而不是类内部结构
+UML 组件图 (Component Diagram)更偏向系统层次，展示 .dll / .so 或模块接口关系，不适合画类的继承和方法细节
+
+https://chatgpt.com/c/689d6310-c5d0-8326-8786-983ed44549eb
+
+13. 对于源码中条件编译语句，触发其是否编译的宏的开启有好几种方式，以DEBUG举例
+1. 源码中定义
+在某个头文件或者源文件会有 #define DEBUG 1
+你可以全局搜索 #define DEBUG。
+2. 编译器命令行参数
+比如在 Makefile、CMakeLists.txt 或者编译脚本里，可能会有：
+g++ -DDEBUG ...
+-DDEBUG 就等价于 #define DEBUG 1。
+如果写成 -DDEBUG=0，那 #if DEBUG 条件就不成立。
+
+3. 在构建系统里区分 Debug/Release 模式
+比如 CMake 默认会定义 DEBUG 或者 _DEBUG 宏（视平台和编译器而定）
+你可以查看构建目录里的 compile_commands.json 或者直接在 Makefile/CMake 输出的编译命令行中搜索 -DDEBUG。
+
+16. svm blame file_name
+查看文件每一行最近一次被修改的作者和版本号信息。 -v 选项可以显示时间等额外信息。
+
+17. svn log -r [revision_num] -v 
+显示版本[revision_num]受影响的文件。即该版本改动的文件列表
+
+18. svn log -r [revision] --diff 
+也可以查看某个版本下修改的细节，具体改动
+
+18.1 svn log -l 10 
+查看最近10次提交。
+说明：
+-l 10 = limit，只显示最近 10 条日志
+默认会从最新的 revision 向前显示
+如果你想看某个文件/目录的最近 10 次提交：
+svn log -l 10 path/to/file
+
+19. svn diff -c <版本号> <文件路径>
+查看某版本对某文件的具体修改
+
+20.  查看某文件两个版本之间的差异
+svn diff -r <旧版本>:<新版本> <文件路径>
+
+21. typedef double Complex[2];
+
+定义了一个新类型名 Complex。
+Complex 实际上是一个 长度为 2 的 double 数组。
+示例用法：
+Complex c1;     // 声明一个复数
+c1[0] = 1.0;    // 实部
+c1[1] = 2.0;    // 虚部
+注： 神奇的用法。。。
+
+22. cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON ..
+加快vscode 解析。。。适合cmake 项目。。。
+
+23. bear make $TesterType $StreamType $SecureType $BuildType $@ -j$(nproc)
+加快makefile 项目的vscode 解析。。。
+
+25. $0 在shell 脚本里面表示脚本文件名
+dir=$(dirname $(readlink -f $0))
+👉 作用是 获取脚本文件自身所在的目录路径，并存到变量 dir。
+
+27. vscode 也可以使用clangd (LSP) 帮助更好的代码分析。
+
+以后可以考虑使用 clangd 这样的(LSP)。 
+
+原本的cpptools 的C/C++ 扩展插件，只能做静态的语义分析。
+C++ 的继承多态不能很好的被静态语义分析出来。
+即 基类指针指向子类对象，然后这个基类指针调用函数。 可能调用的是子类版本。静态分析没办法准确跳转到子类的实现上。
+不过没关系，全局搜索一下是一种解决方法。
+
+### 驱动
+
+驱动有两种形式： 1. 编译进内核(built-in driver) -- 直接编译进内核，跟着内核一起启动。 优：系统启动时立即可用。 缺：更新驱动要重新编译和安装整个内核。
+2. 编译成内核模块(modular driver) -- 编译成 .ko ，需要时加载，不需要时卸载。  优： 灵活，方便开发调试；更新驱动不需要重编整个内核。 缺：用户手动加载 or udev/modprobe 在检测
+到硬件时自动加载。
+
+### kbuild
+kernel build, Linux 内核使用的构建系统，基于GNU Make.  核心功能是：
+
+- 编译内核本身和内核模块（.ko）；
+- 处理编译依赖关系（源文件和头文件）；
+- 管理配置选项（CONFIG_xxx）和条件编译；
+- 支持增量编译（只编译修改过的部分）。
+
+换句话说，kbuild = “内核专用的 Makefile 框架 + 自动依赖管理”。
+也就是说xdma 驱动就是使用的kbuild 来编成一个内核模块来在项目中使用的。内核模块即一个".ko" 。
+
+##### 为什么不用普通 Makefile？
+因为内核规模巨大，依赖复杂，而且编译选项因架构不同而变化，普通 Makefile 难以维护。
+kbuild 统一了规则，开发者只需要写很少的内容（如 obj-m），其余交给 kbuild 自动展开。
+
+### make的两阶段执行机制
+GNU Make 不是一行一行顺序执行 shell 命令，它有两个主要阶段：
+1. 解析阶段（Parse Stage）
+Make 会先把整个 Makefile 读入内存，解析变量、条件语句、函数调用等。
+也就是说，ifneq ($(xvc_bar_num),)、XVC_FLAGS += ... 这种 变量赋值和条件语句 会在执行任何 target 之前就处理完。
+在解析阶段，Make 构建了整个 依赖关系图（dependency graph），知道每个 target 依赖哪些文件和命令。
+注意：这一步不会执行 shell 命令，只有一些像 $(shell pwd)、$(wildcard ...) 这样的 make 函数会调用 shell。
+
+2. 执行阶段（Execution Stage）
+Make 根据解析阶段生成的依赖图，从 默认 target（或你指定的 target）开始，递归地执行各个 target 的命令。
+这时才真正调用 shell 去执行命令。
+小结：
+|       阶段       |                                   做什么                                           |                                  对应你的例子                                                           |
+| ------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| **解析阶段** | 读取 Makefile、计算变量、处理 ifneq/if/else、构建依赖图 | `ifneq ($(xvc_bar_num),)` → 判断、生成 `XVC_FLAGS`                                 |
+| **执行阶段** | 从 target 开始递归执行 shell 命令                                     | `make all` → 调用 `$(MAKE) -C ... modules`，gcc 命令展开 `$(XVC_FLAGS)` |
+
+一句话：
+Make 会 先解析整个文件，所以前面的 ifneq 语句会在 target 执行前就生效。
+Target 执行只是依赖 graph 的遍历和 shell 命令执行阶段，变量已经确定好了。
+
+### 
+/proc/self/exe 是 Linux 下指向 当前运行程序的可执行文件路径 的符号链接。
+readlink 读取这个路径，写到 Buf 里。
+比如，如果程序在 /home/user/app/WT-Server，那 Buf 里就是这个完整路径。
+
+### libev 信号监听器-- 很好用
+
+监听器 只要绑定信号号和对应回调函数就行。
+注册到事件循环里面。
