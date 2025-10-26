@@ -1,0 +1,11 @@
+canonical file name 翻译成中文比较合适的是叫规范文件名或标准文件名。
+是什么含义呢？为什么要有这个canonical file name？
+有这个名词canonical的主要意义是为了比较两个路径是否是同一个路径。
+在linux 上 ../../here/bar/x 和 ./test/../../bar/x 可能指向的是同一个位置，但是单纯比较路径文本你是看不出来的，
+因此转化成一个规范化路径，可能两者都变成了../bar/x。这时候从路径文本上你就可以看出来两个路径是否一样了。
+这就是canonical file name的意义。
+
+from stackoverflow:
+> The whole point of making anything "canonical" is so that you can compare two things. For example, both ../../here/bar/x and ./test/../../bar/x may refer to the same location, but you can't do a textual comparison on the two paths. However, if you turn them into their canonical representation, they both become ../bar/x, and we see that they actually refer to the same thing.
+
+In short, it is often the case that you have many ways of referring to one thing, and in that case you may be able to define a canonical representation which is unique and which allows you to get a handle on col­lections of such things.

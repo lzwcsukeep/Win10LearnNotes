@@ -1,6 +1,6 @@
 Linux 中的进程是分组的，有进程组和会话的概念。
 
-每一个进程都必须属于一个进程组，当一个进程被创建时，它成为父进程所在进程组和会话的一个成员。可以使用setpgid 改变新建的进程所在进程组，但不能改变所在会话。
+每一个进程不仅必须有一个父进程，而且每一个进程都必须属于一个进程组，当一个进程被创建时，它成为父进程所在进程组和会话的一个成员。可以使用setpgid 改变新建的进程所在进程组，但不能改变所在会话。
 >Every process belongs to a process group. When a process is created, it becomes a member of the same process group and session as its parent process. You can put it in another process group using the setpgid function, provided the process group belongs to the same session.
 
 会话是一个更大的进程组，一般来说所有来自于一个单一登录的进程们属于同一个会话。

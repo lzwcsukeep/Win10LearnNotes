@@ -16,7 +16,7 @@ ELF格式提供了两种不同的视角，链接器把ELF文件看成是Section�
 
 图1 ELF文件
 
-![](E:\Files\LearnNotes\img_src\asm.elfoverview.png)
+![](E:\Files\Win10LearnNotes\img_src\asm.elfoverview.png)
 
 
 
@@ -30,4 +30,4 @@ ELF格式提供了两种不同的视角，链接器把ELF文件看成是Section�
 
 链接视角program header table 是可选的,执行视角section header table 是可选的。
 
-![](E:\Files\LearnNotes\img_src\two_view_of_elf.png)
+![](E:\Files\Win10LearnNotes\img_src\two_view_of_elf.png)

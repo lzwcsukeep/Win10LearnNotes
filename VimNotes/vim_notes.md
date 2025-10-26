@@ -62,3 +62,18 @@ tags : vim 当前工作目录下的文件名为 tags 文件。
 
 比如当前打开文件为/pro/code/src/main.cpp ，而工作目录是/pro，那么 ./tags 表示/pro/code/src/tags
 而tags 表示 /pro/tags.
+
+## vim word motion 的通俗理解
+
+b : to begin of current word
+w : to start of next word
+e : to end of current word
+
+## 对文件进行加密
+
+1. 开始编辑一个加密文件，使用 `-x` 参数启动vim, 如： vim -x en_file
+2. 在已打开 vim 编辑一个文件时使用 `:X` 命令加密保存当前编辑文件。
+3. 在 vim 正在编辑文件时，使用命令 `:set key=` 不再加密当前文件。
+
+使用 vim 加密的文件，提供了错误的密码会是乱码，以及用其他命令查看会是乱码，
+比如 cat en_file 或者 sed '' en_file 都是乱码。

@@ -1,0 +1,18 @@
+# json 文件只有两种顶级数据结构：
+
+1. 对象（Object）：用 {} 包裹，里面是 键值对（key-value）。
+
+{
+    "name": "Linux",
+    "cppStandard": "c++17"
+}
+👉 常用在需要 配置选项、参数 的场景。
+
+
+2. 数组（Array）：用 [] 包裹，里面是 一组有序元素。
+[
+    "DEBUG",
+    "USE_FEATURE_X",
+    "VERSION=2"
+]
+👉 常用在需要 多个条目 的场景。

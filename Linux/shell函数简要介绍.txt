@@ -1,0 +1,52 @@
+shell 脚本中可以定义函数，定义函数的作用可以是将一个大的功能划分成多个小功能，
+当需要使用到这个小功能的时候直接调用即可。也可以实现code reuse的目的。
+shell 脚本的函数概念就像其他语言的 subroutines, procedures.
+
+定义语法： 
+[function] function_name () {
+	list of commands
+}
+function_name 是你的函数名字，函数名后面必须要有紧跟着的圆括号()和再紧跟着的大括号{}，
+定义式最前面的function 关键字是可选的。
+
+调用方式：
+直接使用function_name 调用你之前定义的函数。如定义了函数名为Hello的函数，则Hello 就是调用。
+注意：所有函数在使用前必须定义。这意味着必须将函数放在脚本开始部分，直至shell解释器首次发现它时，才可以使用。调用函数仅使用其函数名即可。
+
+## 函数可以传递参数
+示例如下
+---
+file: test.sh
+
+#!/bin/sh
+
+# Define your function here
+Hello () {
+   echo "Hello World $1 $2"
+}
+
+# Invoke your function
+Hello Zara Ali
+----
+输出：
+$./test.sh
+Hello World Zara Ali
+注意：在Shell中，调用函数时可以向其传递参数。在函数体内部，通过 $n 的形式来获取参数的值，例如，$1表示第一个参数，$2表示第二个参数...
+---
+## 函数可以有返回值
+函数返回值在调用该函数后通过 $? 来获得。
+
+## 可以从prompt 运行function
+
+详细解释看这里：
+https://www.tutorialspoint.com/unix/unix-shell-functions.htm
+还有菜鸟教程这里：
+https://www.runoob.com/linux/linux-shell-func.html
+
+总结：
+0. shell 中函数的功能和目的
+1. 函数的定义
+2. 函数的调用
+3. 函数传递参数： 函数体内部使用$1,$2... 形式来获取参数的值。(完全和 shell 脚本一样)
+4. 函数的返回值： 使用return num 的形式返回，num 介于[0-255] 之间。 函数返回值在调用该函数后使用$? 获得。
+5. 从prompt 运行函数。

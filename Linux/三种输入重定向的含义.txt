@@ -1,0 +1,15 @@
+输入重定向可以改变一个shell 命令的输入。共有三种,分别是"<","<<","<<<"。
+
+1.单小于号 < : 把文件当作命令输入 
+command < file_name  : 将文件file_name的内容作为命令command 的输入
+
+2. 双小于号 <<: 把多行文本当作命令输入
+word 是多行文本的开始和结束标记，你可以任取，大多数人使用EOF.
+command <<word
+>someline
+>anotherline
+>...
+>word
+
+3. 三小于号<<<: 把单个字符串作为命令输入。
+comand <<< "singe string" :  single string 作为command 的输入。single string 需要被双引号包围，不然不生效。

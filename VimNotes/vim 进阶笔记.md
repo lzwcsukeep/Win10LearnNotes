@@ -98,12 +98,12 @@ inoremap `<silent><expr>` `<C-y>` coc#pum#visible() ? coc#pum#confirm() : "\<C-y
 These mappings allow you to customize `<C-e>` and `<C-y>` (Ctrl+e and Ctrl+y) in **insert mode** for use with the **coc.nvim** auto-completion menu:
 
 1. **`<C-e>`**:
-   
+
    - If the **popup menu** is visible (`coc#pum#visible()`), it cancels the completion menu using `coc#pum#cancel()`.
    - Otherwise, it falls back to the default behavior of `<C-e>`.
 
 2. **`<C-y>`**:
-   
+
    - If the **popup menu** is visible (`coc#pum#visible()`), it confirms the current selected completion item using `coc#pum#confirm()`.
    - Otherwise, it falls back to the default behavior of `<C-y>`.
 

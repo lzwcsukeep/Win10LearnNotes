@@ -1,0 +1,10 @@
+1. watch -n 1 "ls -l"  : 周期性执行 ls -l 命令，并将 ls -l 的输出全屏显示。 
+watch 命令： 周期性执行某个命令。
+
+2. time command : 统计 shell 命令 command 执行耗费的时间
+time ls -l : 执行ls -l 命令，并输出耗时时间
+
+3. echo "#include <signal.h>" | cpp -dM | grep SIGIO
+利用C预处理器提取出所有宏定义。然后筛选。
+上述命令调用 cpp 预处理命令预处理文件 signal.h 并提取出执行过程中定义的所有宏定义列表，然后使用grep 筛选自己感兴趣的宏定义。
+非常的 amzaing 啊。以后想查看某个宏定义的值简直轻而易举啊。
