@@ -1,0 +1,36 @@
+std::function 是 C++11 引入的一个标准库模板类，用于封装任何可以调用的目标（叫做 callable），比如：
+普通函数
+函数指针
+Lambda 表达式
+成员函数（配合 std::bind 或 std::mem_fn）
+仿函数（重载了 operator() 的类）
+--
+你可以把 std::function 看作一个“函数的智能容器”：
+你把任意可以调用的东西“放”进去
+然后像调用函数一样调用它。
+
+示例代码:
+--- 普通函数 ---
+#include <iostream>
+#include <functional>
+
+void say_hello() {
+    std::cout << "Hello!" << std::endl;
+}
+
+int main() {
+    std::function<void()> f = say_hello;  // 包裹函数
+    f();  // 调用
+}
+-- lambda--
+
+std::function<int(int, int)> adder = [](int a, int b) {
+    return a + b;
+};
+
+std::cout << adder(2, 3);  // 输出 5
+---
+总结：
+std::function<R(Args...)> 是 C++11 提供的强大工具，
+可以将任何可调用对象（函数、lambda、仿函数、成员函数等）统一封装，方便作为参数传递、异步调用、回调管理等。
+

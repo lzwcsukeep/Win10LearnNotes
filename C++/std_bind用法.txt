@@ -1,0 +1,52 @@
+# 简单理解：什么是 std::bind？
+std::bind 允许你预先“绑定”函数的一部分参数，返回一个新的函数对象（callable），你以后可以用这个新函数来调用原函数，传入剩下的参数。
+
+# 最基础用法代码示例：
+
+#include <iostream>
+#include <functional>
+
+int add(int a, int b) {
+    return a + b;
+}
+
+int main() {
+    auto f = std::bind(add, 2, 3);  // 把参数 2 和 3 绑定进函数
+    std::cout << f();  // 输出 5
+}
+
+只绑定部分参数：
+
+auto f = std::bind(add, 2, std::placeholders::_1);
+std::cout << f(10);  // 相当于调用 add(2, 10)，输出 12
+
+语法就是 ： std::bind(函数, 参数1, 参数2, ..., 参数N)
+可以完全把参数指定完，也可以留下一部分参数以后给定，使用 std::placeholders::_1, _2, _3, ... 来表示将来再传入的参数位置。
+
+注意绑定类的成员函数需要传入对象的指针或引用。
+
+struct MyClass {
+    void greet(const std::string& name) {
+        std::cout << "Hello, " << name << std::endl;
+    }
+};
+
+MyClass obj;
+
+auto f = std::bind(&MyClass::greet, &obj, std::placeholders::_1);
+f("Alice");  // 输出 Hello, Alice
+---
+# 与 std::function 搭配使用
+
+std::function<void()> func = std::bind(&MyClass::greet, &obj, "Tom");
+func();  // 输出 Hello, Tom
+
+# 小结：
+std::bind 的功能就是，提前绑定函数某些参数，生成一个新的可调用对象，可以与std::function 配合。
+
+| 功能                                   | 例子                                                              |
+| ------------------------------| ------------------------------------------------ |
+| 把某些参数提前绑定             | `std::bind(func, 2, _1)` → 固定第一个参数        |
+| 生成简化的函数对象             | 适合传给 `std::function`, 回调，线程等            |
+| 调用类的成员函数                | `std::bind(&Class::Method, &obj, _1)`             |
+| 配合 `std::function` 使用      | `std::function<void()> f = std::bind(...)`          |

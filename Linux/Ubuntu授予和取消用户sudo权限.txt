@@ -1,0 +1,8 @@
+1. 给用户添加root 权限
+
+usermod -aG sudo [username]
+示例: usermod -aG sudo wt400  // 给用户wt400 授予root权限
+
+2. 取消用户root 权限
+
+sudo gpasswd -d wt400 sudo // 取消用户wt400 root权限

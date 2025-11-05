@@ -26,5 +26,3 @@ hello.o: hello.c hello.h
 ```
 
 Here, `hello.o` is the output file. This is what `$@` expands to. The first dependency is `hello.c`. That's what `$<` expands to.
-
-

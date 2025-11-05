@@ -1,0 +1,18 @@
+C++ 静态成员变量是属于类的而不是对象的变量。它在内存中只分配一次，无论你创建多少个类的实例，
+它们共享这个一个静态变量。
+
+class MyClass {
+public:
+    static int count;  // 声明：声明了一个静态成员变量
+};
+
+* 静态成员初始化的关键点 *
+
+必须在类外部初始化(除非是 constexpr 或者 内联变量)
+
+int MyClass::cout = 0 ; // 定义加初始化
+
+注意：
+在类内只是声明；
+在类外才是定义并分配内存的地方；
+否则链接时会报错：undefined reference to MyClass::count。
