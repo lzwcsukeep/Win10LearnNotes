@@ -1,0 +1,25 @@
+catch fork : catch 用来捕获事件。 catch fork 会捕获 fork 系统调用
+
+set detach-on-fork off
+
+set follow-fork-mode child
+
+set schedule-multiple off
+
+
+show detach-on-fork
+show follow-fork-mode
+show schedule-multiple
+
+
+info inferiors
+inferior 2
+detach inferiors 2
+
+
+ptype 变量名
+ptype struct foo
+ptype /o var                           # 打印结构体 + 每个成员 offset、大小、bit 位
+
+
+whatis var                               # 只打印结构体名字

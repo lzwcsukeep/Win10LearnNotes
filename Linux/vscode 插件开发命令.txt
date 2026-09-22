@@ -1,0 +1,6 @@
+
+cd ~/function-call-exporter
+
+npm run compile
+
+vsce package
